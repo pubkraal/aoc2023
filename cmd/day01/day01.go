@@ -5,24 +5,22 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/pubkraal/aoc2023/internal/force"
 	"github.com/pubkraal/aoc2023/internal/input"
 )
 
 func main() {
-	fmt.Println("Day 1")
-
 	// Define flags
-	filename := flag.String("file", "", "Input filename")
 	flag.Parse()
-
-	// Check if filename is provided
-	if *filename == "" {
-		fmt.Println("Please provide an input filename")
+	if flag.NArg() == 0 {
+		flag.Usage()
 		os.Exit(1)
 	}
 
-	// Read input file into string
-	input := input.ReadFileToString(*filename)
+	filename := flag.Arg(0)
 
-	fmt.Println(input)
+	// Read input file into string
+	input := force.Must(input.ReadFileToString(filename))
+
+	fmt.Printf(input)
 }
