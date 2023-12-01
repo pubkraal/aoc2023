@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 	"unicode"
 
 	"github.com/pubkraal/aoc2023/internal/force"
@@ -24,6 +25,8 @@ func main() {
 	p1 := 0
 	p2 := 0
 
+	namedDigits := []string{"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"}
+
 	for _, line := range input {
 		p1digits := make([]int, 0)
 		p2digits := make([]int, 0)
@@ -33,25 +36,11 @@ func main() {
 				p2digits = append(p2digits, int(r-'0'))
 				continue
 			}
-			switch {
-			case gotNamedDigit(line, i, "one"):
-				p2digits = append(p2digits, 1)
-			case gotNamedDigit(line, i, "two"):
-				p2digits = append(p2digits, 2)
-			case gotNamedDigit(line, i, "three"):
-				p2digits = append(p2digits, 3)
-			case gotNamedDigit(line, i, "four"):
-				p2digits = append(p2digits, 4)
-			case gotNamedDigit(line, i, "five"):
-				p2digits = append(p2digits, 5)
-			case gotNamedDigit(line, i, "six"):
-				p2digits = append(p2digits, 6)
-			case gotNamedDigit(line, i, "seven"):
-				p2digits = append(p2digits, 7)
-			case gotNamedDigit(line, i, "eight"):
-				p2digits = append(p2digits, 8)
-			case gotNamedDigit(line, i, "nine"):
-				p2digits = append(p2digits, 9)
+
+			for j, name := range namedDigits {
+				if strings.HasPrefix(line[i:], name) {
+					p2digits = append(p2digits, j+1)
+				}
 			}
 		}
 		p1 += (p1digits[0] * 10) + p1digits[len(p1digits)-1]
@@ -59,12 +48,4 @@ func main() {
 	}
 	fmt.Println("01:", p1)
 	fmt.Println("02:", p2)
-}
-
-func gotNamedDigit(line string, i int, name string) bool {
-	stop := i + len(name)
-	if len(line) >= stop && line[i:stop] == name {
-		return true
-	}
-	return false
 }
