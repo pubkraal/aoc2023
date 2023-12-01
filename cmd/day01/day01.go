@@ -33,37 +33,25 @@ func main() {
 				p2digits = append(p2digits, int(r-'0'))
 				continue
 			}
-			switch r {
-			case 'e':
-				if gotNamedDigit(line, i, "eight") {
-					p2digits = append(p2digits, 8)
-				}
-			case 'f':
-				if gotNamedDigit(line, i, "four") {
-					p2digits = append(p2digits, 4)
-				} else if gotNamedDigit(line, i, "five") {
-					p2digits = append(p2digits, 5)
-				}
-			case 'n':
-				if gotNamedDigit(line, i, "nine") {
-					p2digits = append(p2digits, 9)
-				}
-			case 'o':
-				if gotNamedDigit(line, i, "one") {
-					p2digits = append(p2digits, 1)
-				}
-			case 's':
-				if gotNamedDigit(line, i, "seven") {
-					p2digits = append(p2digits, 7)
-				} else if gotNamedDigit(line, i, "six") {
-					p2digits = append(p2digits, 6)
-				}
-			case 't':
-				if gotNamedDigit(line, i, "three") {
-					p2digits = append(p2digits, 3)
-				} else if gotNamedDigit(line, i, "two") {
-					p2digits = append(p2digits, 2)
-				}
+			switch {
+			case gotNamedDigit(line, i, "one"):
+				p2digits = append(p2digits, 1)
+			case gotNamedDigit(line, i, "two"):
+				p2digits = append(p2digits, 2)
+			case gotNamedDigit(line, i, "three"):
+				p2digits = append(p2digits, 3)
+			case gotNamedDigit(line, i, "four"):
+				p2digits = append(p2digits, 4)
+			case gotNamedDigit(line, i, "five"):
+				p2digits = append(p2digits, 5)
+			case gotNamedDigit(line, i, "six"):
+				p2digits = append(p2digits, 6)
+			case gotNamedDigit(line, i, "seven"):
+				p2digits = append(p2digits, 7)
+			case gotNamedDigit(line, i, "eight"):
+				p2digits = append(p2digits, 8)
+			case gotNamedDigit(line, i, "nine"):
+				p2digits = append(p2digits, 9)
 			}
 		}
 		p1 += (p1digits[0] * 10) + p1digits[len(p1digits)-1]
