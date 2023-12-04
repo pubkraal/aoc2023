@@ -1,6 +1,9 @@
 package util
 
-import "sort"
+import (
+	"sort"
+	"strings"
+)
 
 type Inty interface {
 	int | int8 | int16 | int32 | int64
@@ -31,4 +34,15 @@ func GetSortedKeys[T Inty](m map[T]bool) []T {
 		return keys[i] < keys[j]
 	})
 	return keys
+}
+
+func SplitAndFilter(s string, sep string) []string {
+	parts := strings.Split(s, sep)
+	ret := make([]string, 0)
+	for _, part := range parts {
+		if len(part) > 0 {
+			ret = append(ret, part)
+		}
+	}
+	return ret
 }
