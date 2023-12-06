@@ -36,6 +36,16 @@ func GetSortedKeys[T Inty](m map[T]bool) []T {
 	return keys
 }
 
+func Filter(a []string) []string {
+	ret := make([]string, 0)
+	for _, part := range a {
+		if len(part) > 0 {
+			ret = append(ret, part)
+		}
+	}
+	return ret
+}
+
 func SplitAndFilter(s string, sep string) []string {
 	parts := strings.Split(s, sep)
 	ret := make([]string, 0)
