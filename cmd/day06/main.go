@@ -3,9 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/pubkraal/aoc2023/internal/force"
 	"github.com/pubkraal/aoc2023/internal/input"
@@ -28,35 +30,27 @@ func main() {
 	p2time := strings.Join(times, "")
 	p2distance := strings.Join(distances, "")
 
+	s1 := time.Now()
 	p1 := calcRace(times, distances)
+	t1 := time.Since(s1)
+	s2 := time.Now()
 	p2 := calcRace([]string{p2time}, []string{p2distance})
+	t2 := time.Since(s2)
 
-	fmt.Println("01: ", p1)
-	fmt.Println("02: ", p2)
+	fmt.Printf("01: %d (%v)\n", p1, t1)
+	fmt.Printf("02: %d (%v)\n", p2, t2)
 }
 
-func getDistanceTravelled(time, maxtime int) int {
-	return time * (maxtime - time)
-}
-
-func calcRace(times, distances []string) int {
+func calcRace(times, dinstances []string) int {
 	res := 1
 	for i := 0; i < len(times); i++ {
-		cur_time := force.Must(strconv.Atoi(times[i]))
-		cur_distance := force.Must(strconv.Atoi(distances[i]))
+		time := force.Must(strconv.Atoi(times[i]))
+		distance := force.Must(strconv.Atoi(dinstances[i]))
 
-		c := cur_time
-
-		for j := 0; j < cur_time; j++ {
-			dist := getDistanceTravelled(j, cur_time)
-			if dist > cur_distance {
-				c = j
-				break
-			}
-		}
-
-		num := cur_time - (2*c - 1)
-		res *= num
+		term := math.Sqrt(math.Pow(float64(time), 2.0) - (4.0 * float64(distance)))
+		lower := (float64(time) - term) / 2.0
+		upper := (float64(time) + term) / 2.0
+		res *= int(math.Floor(upper)) - int(math.Ceil(lower)) + 1
 	}
 	return res
 }
