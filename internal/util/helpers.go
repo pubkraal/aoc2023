@@ -23,6 +23,14 @@ func Min[T Inty](a, b T) T {
 	return b
 }
 
+func GetKeys[T comparable, V any](m map[T]V) []T {
+	keys := make([]T, 0)
+	for k := range m {
+		keys = append(keys, k)
+	}
+	return keys
+}
+
 func GetSortedKeys[T Inty](m map[T]bool) []T {
 	keys := make([]T, len(m))
 	i := 0
