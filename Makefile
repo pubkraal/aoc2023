@@ -1,5 +1,5 @@
 .PHONY: all
-all: target/day01 target/day02 target/day03 target/day04 target/day05 target/day06 target/day07 target/day08 target/day09
+all: target/day01 target/day02 target/day03 target/day04 target/day05 target/day06 target/day07 target/day08 target/day09 target/day10 target/day11 target/day12
 
 target/day01: $(shell find cmd/day01 -name "*.go") $(shell find internal -name "*.go")
 	go build -o ./target/day01 ./cmd/day01
@@ -27,6 +27,15 @@ target/day08: $(shell find cmd/day08 -name "*.go") $(shell find internal -name "
 
 target/day09: $(shell find cmd/day09 -name "*.go") $(shell find internal -name "*.go")
 	go build -o ./target/day09 ./cmd/day09
+
+target/day10: $(shell find cmd/day10 -name "*.go") $(shell find internal -name "*.go")
+	go build -o ./target/day10 ./cmd/day10
+
+target/day11: $(shell find cmd/day11 -name "*.go") $(shell find internal -name "*.go")
+	go build -o ./target/day11 ./cmd/day11
+
+target/day12: $(shell find cmd/day12 -name "*.go") $(shell find internal -name "*.go")
+	go build -o ./target/day12 ./cmd/day12
 
 .PHONY: test
 test:
