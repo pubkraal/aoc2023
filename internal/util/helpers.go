@@ -70,3 +70,12 @@ func SplitAndFilter(s string, sep string) []string {
 	}
 	return ret
 }
+
+func In[T comparable](needle T, haystack []T) bool {
+	for _, v := range haystack {
+		if v == needle {
+			return true
+		}
+	}
+	return false
+}
